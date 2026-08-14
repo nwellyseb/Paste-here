@@ -8,26 +8,26 @@
         body {
             margin: 0;
             height: 100vh;
-            background-color: #0f172a;
+            background-color: #1e1e1e; /* VS Code background */
             font-family: 'Courier New', Courier, monospace;
             display: flex;
             justify-content: center;
             align-items: center;
-            color: #38bdf8;
+            color: #d4d4d4;
         }
 
         .terminal {
-            width: 80%;
-            max-width: 600px;
-            background-color: #1e293b;
+            width: 85%;
+            max-width: 700px;
+            background-color: #1e1e1e;
             border-radius: 8px;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.6);
             overflow: hidden;
-            border: 1px: solid #334155;
+            border: 1px solid #333333;
         }
 
         .terminal-header {
-            background-color: #0f172a;
+            background-color: #2d2d2d;
             padding: 10px 15px;
             display: flex;
             align-items: center;
@@ -40,30 +40,37 @@
             border-radius: 50%;
         }
 
-        .red { background-color: #ef4444; }
-        .yellow { background-color: #f59e0b; }
-        .green { background-color: #10b981; }
+        .red { background-color: #ff5f56; }
+        .yellow { background-color: #ffbd2e; }
+        .green { background-color: #27c93f; }
 
         .terminal-title {
-            color: #94a3b8;
-            font-size: 14px;
+            color: #999999;
+            font-size: 13px;
             margin-left: 10px;
         }
 
         .terminal-body {
             padding: 20px;
-            font-size: 16px;
+            font-size: 15px;
             line-height: 1.6;
             white-space: pre-wrap;
-            color: #e2e8f0;
-            min-height: 200px;
+            min-height: 240px;
         }
+
+        /* VS Code Dark+ Theme Colors */
+        .comment { color: #6a9955; }
+        .keyword { color: #569cd6; }
+        .variable { color: #9cdcfe; }
+        .function { color: #dcdcaa; }
+        .string { color: #ce9178; }
+        .punct { color: #d4d4d4; }
 
         .cursor {
             display: inline-block;
             width: 8px;
-            height: 18px;
-            background-color: #38bdf8;
+            height: 16px;
+            background-color: #aeafad;
             animation: blink 1s infinite;
             vertical-align: middle;
             margin-left: 2px;
@@ -72,6 +79,14 @@
         @keyframes blink {
             0%, 50% { opacity: 1; }
             51%, 100% { opacity: 0; }
+        }
+
+        .hint {
+            position: absolute;
+            bottom: 20px;
+            color: #777;
+            font-size: 12px;
+            letter-spacing: 0.5px;
         }
     </style>
 </head>
@@ -84,41 +99,117 @@
             <div class="dot green"></div>
             <div class="terminal-title">love_script.js</div>
         </div>
-        <div class="terminal-body">
-            <span id="code-text"></span><span class="cursor"></span>
-        </div>
+        <div class="terminal-body" id="terminal-body"><span id="code-content"></span><span class="cursor"></span></div>
     </div>
 
+    <div class="hint">Click anywhere on the page to enable typing sound effects!</div>
+
     <script>
-        const codeLines = `// Initializing system...
-const girlfriend = {
-    name: "My Everything ❤️",
-    smile: "Absolute perfection",
-    status: "Making my life infinitely better"
-};
+        // Tokenized code structure with VS Code syntax types
+        const tokens = [
+            { text: "// Initializing system...\n", type: "comment" },
+            { text: "const", type: "keyword" },
+            { text: " girlfriend", type: "variable" },
+            { text: " = {\n", type: "punct" },
+            { text: "    name", type: "variable" },
+            { text: ": ", type: "punct" },
+            { text: '"My Everything ❤️"', type: "string" },
+            { text: ",\n    smile", type: "variable" },
+            { text: ": ", type: "punct" },
+            { text: '"Absolute perfection"', type: "string" },
+            { text: ",\n    status", type: "variable" },
+            { text: ": ", type: "punct" },
+            { text: '"Making my life infinitely better"\n', type: "string" },
+            { text: "};\n\n", type: "punct" },
+            { text: "function", type: "keyword" },
+            { text: " declareLove", type: "function" },
+            { text: "() {\n", type: "punct" },
+            { text: "    console", type: "variable" },
+            { text: ".", type: "punct" },
+            { text: "log", type: "function" },
+            { text: '("Loading feelings...");\n', type: "string" },
+            { text: "    ", type: "punct" },
+            { text: "return", type: "keyword" },
+            { text: ' "I love you more than words can code!";\n', type: "string" },
+            { text: "};\n\n", type: "punct" },
+            { text: "// Running sequence...\n", type: "comment" },
+            { text: "console", type: "variable" },
+            { text: ".", type: "punct" },
+            { text: "log", type: "function" },
+            { text: "(", type: "punct" },
+            { text: "declareLove", type: "function" },
+            { text: "());", type: "punct" }
+        ];
 
-function declareLove() {
-    console.log("Loading feelings...");
-    return "I love you more than words can code!";
-}
+        let audioCtx = null;
 
-// Running sequence...
-console.log(declareLove());`;
+        // Initialize Web Audio API on click
+        window.addEventListener('click', () => {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+        }, { once: true });
 
-        let i = 0;
-        const speed = 40; // Speed of typing in milliseconds
-        const target = document.getElementById("code-text");
+        // Play synthetic mechanical keyboard click sound
+        function playKeySound() {
+            if (!audioCtx) return;
+            try {
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(500 + Math.random() * 400, audioCtx.currentTime);
+                gain.gain.setValueAtTime(0.015, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.02);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.02);
+            } catch (e) {}
+        }
+
+        const container = document.getElementById("code-content");
+        let tokenIdx = 0;
+        let charIdx = 0;
+        let currentSpan = null;
 
         function typeWriter() {
-            if (i < codeLines.length) {
-                target.textContent += codeLines.charAt(i);
-                i++;
-                setTimeout(typeWriter, speed);
+            if (tokenIdx < tokens.length) {
+                const token = tokens[tokenIdx];
+                
+                if (charIdx === 0) {
+                    currentSpan = document.createElement("span");
+                    currentSpan.className = token.type;
+                    container.appendChild(currentSpan);
+                }
+
+                const currentChar = token.text.charAt(charIdx);
+                currentSpan.textContent += currentChar;
+                
+                // Play sound if character is not a newline/space
+                if (currentChar.trim() !== "") {
+                    playKeySound();
+                }
+
+                charIdx++;
+
+                let typingSpeed = 35 + Math.random() * 25; // Random typing variation
+
+                // Longer pause after a full line (when hitting newline)
+                if (currentChar === '\n') {
+                    typingSpeed = 450; 
+                }
+
+                if (charIdx >= token.text.length) {
+                    tokenIdx++;
+                    charIdx = 0;
+                }
+
+                setTimeout(typeWriter, typingSpeed);
             }
         }
 
-        // Start typing after a short pause
-        setTimeout(typeWriter, 800);
+        // Start typing after a short initial pause
+        setTimeout(typeWriter, 1000);
     </script>
 
 </body>
