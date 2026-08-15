@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Compiling Date Wheel...</title>
+    <title>Compiling Love...</title>
     <style>
         body {
             margin: 0;
@@ -18,7 +18,7 @@
 
         .terminal {
             width: 85%;
-            max-width: 750px;
+            max-width: 700px;
             background-color: #1e1e1e;
             border-radius: 8px;
             box-shadow: 0 20px 30px rgba(0, 0, 0, 0.6);
@@ -52,11 +52,11 @@
 
         .terminal-body {
             padding: 20px;
-            font-size: 13px;
+            font-size: 15px;
             line-height: 1.6;
             white-space: pre-wrap;
-            min-height: 250px;
-            max-height: 450px;
+            min-height: 240px;
+            max-height: 400px;
             overflow-y: auto;
         }
 
@@ -107,52 +107,65 @@
     <div class="hint">Click anywhere on the page to enable typing sound effects!</div>
 
     <script>
-        // Your exact spin-wheel HTML code broken into tokenized strings so it types out line-by-line looking like real code
+        // Tokenized code structure using your exact original token format, 
+        // but now typing out your exact spin-wheel HTML code line-by-line as text.
         const tokens = [
-            { text: "// Writing spin_wheel_date.html...\n", type: "comment" },
-            { text: "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n", type: "keyword" },
-            { text: "<meta charset=\"UTF-8\" />\n", type: "punct" },
-            { text: "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no\" />\n", type: "punct" },
-            { text: "<title>Spin for a Date Night 🎡</title>\n", type: "string" },
-            { text: "<style>\n", type: "keyword" },
+            { text: "// Initializing spin_wheel_date.html...\n", type: "comment" },
+            { text: "<!DOCTYPE", type: "keyword" },
+            { text: " html", type: "variable" },
+            { text: ">\n<html", type: "punct" },
+            { text: " lang", type: "variable" },
+            { text: '="en"', type: "string" },
+            { text: ">\n<head>\n", type: "punct" },
+            { text: "<meta", type: "keyword" },
+            { text: " charset", type: "variable" },
+            { text: '="UTF-8"', type: "string" },
+            { text: " />\n", type: "punct" },
+            { text: "<meta", type: "keyword" },
+            { text: " name", type: "variable" },
+            { text: '="viewport"', type: "string" },
+            { text: " content", type: "variable" },
+            { text: '="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"', type: "string" },
+            { text: " />\n", type: "punct" },
+            { text: "<title>", type: "punct" },
+            { text: "Spin for a Date Night 🎡", type: "string" },
+            { text: "</title>\n<style>\n", type: "punct" },
             { text: "  * { box-sizing:border-box; margin:0; padding:0; font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif; user-select:none; }\n", type: "comment" },
-            { text: "  body { background: linear-gradient(135deg, #ffe6ea 0%, #ffc3d0 100%); min-height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; padding:20px; }\n", type: "comment" },
+            { text: "  body {\n    background: linear-gradient(135deg, #ffe6ea 0%, #ffc3d0 100%);\n    min-height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center;\n    padding:20px;\n  }\n", type: "comment" },
             { text: "  h1 { color:#e63956; font-size:22px; margin-bottom:20px; text-align:center; }\n", type: "comment" },
             { text: "  .wheel-wrap { position:relative; width:300px; height:300px; margin-bottom:24px; }\n", type: "comment" },
-            { text: "  .pointer { position:absolute; top:-10px; left:50%; transform:translateX(-50%); width:0; height:0; border-left:14px solid transparent; border-right:14px solid transparent; border-top:24px solid #e63956; z-index:10; }\n", type: "comment" },
-            { text: "  #wheel { width:100%; height:100%; border-radius:50%; border:6px solid #fff; box-shadow:0 15px 35px rgba(230,80,115,0.3); transition: transform 4s cubic-bezier(0.17,0.67,0.12,0.99); }\n", type: "comment" },
-            { text: "  .spin-btn { padding:14px 32px; border:none; border-radius:50px; background:#ff4769; color:#fff; font-weight:700; font-size:16px; box-shadow:0 8px 20px rgba(255,71,105,0.4); cursor:pointer; }\n", type: "comment" },
-            { text: "  .result { margin-top:20px; background:#fff; padding:16px 22px; border-radius:16px; text-align:center; font-weight:700; color:#c72c48; font-size:16px; box-shadow:0 8px 20px rgba(230,80,115,0.15); max-width:300px; display:none; }\n", type: "comment" },
-            { text: "</style>\n</head>\n<body>\n", type: "keyword" },
-            { text: "<h1>Spin for tonight's date idea 🎡</h1>\n<div class=\"wheel-wrap\">\n  <div class=\"pointer\"></div>\n  <canvas id=\"wheel\" width=\"300\" height=\"300\"></canvas>\n</div>\n", type: "punct" },
-            { text: "<button class=\"spin-btn\" id=\"spinBtn\">SPIN THE WHEEL</button>\n<div class=\"result\" id=\"result\"></div>\n \n<script>\n", type: "punct" },
+            { text: "  .pointer {\n    position:absolute; top:-10px; left:50%; transform:translateX(-50%);\n    width:0; height:0; border-left:14px solid transparent; border-right:14px solid transparent;\n    border-top:24px solid #e63956; z-index:10;\n  }\n", type: "comment" },
+            { text: "  #wheel {\n    width:100%; height:100%; border-radius:50%; border:6px solid #fff;\n    box-shadow:0 15px 35px rgba(230,80,115,0.3); transition: transform 4s cubic-bezier(0.17,0.67,0.12,0.99);\n  }\n", type: "comment" },
+            { text: "  .spin-btn {\n    padding:14px 32px; border:none; border-radius:50px; background:#ff4769; color:#fff;\n    font-weight:700; font-size:16px; box-shadow:0 8px 20px rgba(255,71,105,0.4); cursor:pointer;\n  }\n", type: "comment" },
+            { text: "  .result {\n    margin-top:20px; background:#fff; padding:16px 22px; border-radius:16px; text-align:center;\n    font-weight:700; color:#c72c48; font-size:16px; box-shadow:0 8px 20px rgba(230,80,115,0.15);\n    max-width:300px; display:none;\n  }\n</style>\n</head>\n", type: "comment" },
+            { text: "<body>\n<h1>Spin for tonight's date idea 🎡</h1>\n<div class=\"wheel-wrap\">\n  <div class=\"pointer\"></div>\n  <canvas id=\"wheel\" width=\"300\" height=\"300\"></canvas>\n</div>\n<button class=\"spin-btn\" id=\"spinBtn\">SPIN THE WHEEL</button>\n<div class=\"result\" id=\"result\"></div>\n \n<script>\n", type: "punct" },
             { text: "  const", type: "keyword" },
             { text: " options", type: "variable" },
             { text: " = [\n    ", type: "punct" },
-            { text: "\"Movie night at home 🍿\"", type: "string" },
+            { text: '"Movie night at home 🍿"', type: "string" },
             { text: ", ", type: "punct" },
-            { text: "\"Cook a new recipe together 🍝\"", type: "string" },
+            { text: '"Cook a new recipe together 🍝"', type: "string" },
             { text: ", ", type: "punct" },
-            { text: "\"Stargazing 🌌\"", type: "string" },
+            { text: '"Stargazing 🌌"', type: "string" },
             { text: ",\n    ", type: "punct" },
-            { text: "\"Picnic in the park 🧺\"", type: "string" },
+            { text: '"Picnic in the park 🧺"', type: "string" },
             { text: ", ", type: "punct" },
-            { text: "\"Karaoke night 🎤\"", type: "string" },
+            { text: '"Karaoke night 🎤"', type: "string" },
             { text: ", ", type: "punct" },
-            { text: "\"Try a new restaurant 🍜\"", type: "string" },
+            { text: '"Try a new restaurant 🍜"', type: "string" },
             { text: ",\n    ", type: "punct" },
-            { text: "\"Game night 🎲\"", type: "string" },
+            { text: '"Game night 🎲"', type: "string" },
             { text: ", ", type: "punct" },
-            { text: "\"Sunset walk 🌅\"", type: "string" },
+            { text: '"Sunset walk 🌅"', type: "string" },
             { text: ", ", type: "punct" },
-            { text: "\"Photo booth strips 📸\"", type: "string" },
+            { text: '"Photo booth strips 📸"', type: "string" },
             { text: ", ", type: "punct" },
-            { text: "\"Coffee date ☕\"", type: "string" },
+            { text: '"Coffee date ☕"', type: "string" },
             { text: "\n  ];\n", type: "punct" },
             { text: "  const", type: "keyword" },
             { text: " colors", type: "variable" },
             { text: " = ", type: "punct" },
-            { text: "[\"#ff8fa3\",\"#ff4769\",\"#ffb3c1\",\"#e63956\",\"#ff9eb1\",\"#d81b60\",\"#ffc0cb\",\"#c72c48\",\"#ff7a90\",\"#eb5c73\"];\n \n", type: "string" },
+            { text: '["#ff8fa3","#ff4769","#ffb3c1","#e63956","#ff9eb1","#d81b60","#ffc0cb","#c72c48","#ff7a90","#eb5c73"];\n \n', type: "string" },
             { text: "  const", type: "keyword" },
             { text: " canvas", type: "variable" },
             { text: " = ", type: "punct" },
@@ -243,11 +256,11 @@
                 // Auto-scroll terminal to follow typing
                 terminalBody.scrollTop = terminalBody.scrollHeight;
 
-                let typingSpeed = 20 + Math.random() * 20; // Fast typing speed
+                let typingSpeed = 25 + Math.random() * 20; // Random typing variation
 
-                // Longer pause after hitting a newline
+                // Longer pause after a full line (when hitting newline)
                 if (currentChar === '\n') {
-                    typingSpeed = 250; 
+                    typingSpeed = 350; 
                 }
 
                 if (charIdx >= token.text.length) {
