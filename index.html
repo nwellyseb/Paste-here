@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Compiling Date Night Wheel...</title>
+    <title>Compiling Love...</title>
     <style>
         body {
             margin: 0;
@@ -56,8 +56,6 @@
             line-height: 1.6;
             white-space: pre-wrap;
             min-height: 240px;
-            max-height: 400px;
-            overflow-y: auto;
         }
 
         /* VS Code Dark+ Theme Colors */
@@ -67,9 +65,6 @@
         .function { color: #dcdcaa; }
         .string { color: #ce9178; }
         .punct { color: #d4d4d4; }
-        .html-tag { color: #569cd6; }
-        .attr-name { color: #9cdcfe; }
-        .attr-val { color: #ce9178; }
 
         .cursor {
             display: inline-block;
@@ -110,91 +105,54 @@
     <div class="hint">Click anywhere on the page to enable typing sound effects!</div>
 
     <script>
-        // Tokenized code structure with exact original typing mechanics and speed rules
+        // Tokenized code structure exactly matching the first prompt's format, displaying the second prompt's code content
         const tokens = [
-            { text: "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"UTF-8\" />\n", type: "html-tag" },
-            { text: "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no\" />\n", type: "html-tag" },
-            { text: "<title>", type: "html-tag" },
-            { text: "Spin for a Date Night 🎡", type: "string" },
-            { text: "</title>\n<style>\n", type: "html-tag" },
-            { text: "  * { box-sizing:border-box; margin:0; padding:0; font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif; user-select:none; }\n", type: "comment" },
-            { text: "  body {\n    background: linear-gradient(135deg, #ffe6ea 0%, #ffc3d0 100%);\n    min-height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center;\n    padding:20px;\n  }\n", type: "comment" },
-            { text: "  h1 { color:#e63956; font-size:22px; margin-bottom:20px; text-align:center; }\n", type: "comment" },
-            { text: "  .wheel-wrap { position:relative; width:300px; height:300px; margin-bottom:24px; }\n", type: "comment" },
-            { text: "  .pointer {\n    position:absolute; top:-10px; left:50%; transform:translateX(-50%);\n    width:0; height:0; border-left:14px solid transparent; border-right:14px solid transparent;\n    border-top:24px solid #e63956; z-index:10;\n  }\n", type: "comment" },
-            { text: "  #wheel {\n    width:100%; height:100%; border-radius:50%; border:6px solid #fff;\n    box-shadow:0 15px 35px rgba(230,80,115,0.3); transition: transform 4s cubic-bezier(0.17,0.67,0.12,0.99);\n  }\n", type: "comment" },
-            { text: "  .spin-btn {\n    padding:14px 32px; border:none; border-radius:50px; background:#ff4769; color:#fff;\n    font-weight:700; font-size:16px; box-shadow:0 8px 20px rgba(255,71,105,0.4); cursor:pointer;\n  }\n", type: "comment" },
-            { text: "  .result {\n    margin-top:20px; background:#fff; padding:16px 22px; border-radius:16px; text-align:center;\n    font-weight:700; color:#c72c48; font-size:16px; box-shadow:0 8px 20px rgba(230,80,115,0.15);\n    max-width:300px; display:none;\n  }\n</style>\n</head>\n", type: "comment" },
-            { text: "<body>\n<h1>Spin for tonight's date idea 🎡</h1>\n<div class=\"wheel-wrap\">\n  <div class=\"pointer\"></div>\n  <canvas id=\"wheel\" width=\"300\" height=\"300\"></canvas>\n</div>\n<button class=\"spin-btn\" id=\"spinBtn\">SPIN THE WHEEL</button>\n<div class=\"result\" id=\"result\"></div>\n \n<script>\n", type: "html-tag" },
-            { text: "  const", type: "keyword" },
-            { text: " options", type: "variable" },
-            { text: " = [\n    ", type: "punct" },
-            { text: "\"Movie night at home 🍿\"", type: "string" },
-            { text: ", ", type: "punct" },
-            { text: "\"Cook a new recipe together 🍝\"", type: "string" },
-            { text: ", ", type: "punct" },
-            { text: "\"Stargazing 🌌\"", type: "string" },
-            { text: ",\n    ", type: "punct" },
-            { text: "\"Picnic in the park 🧺\"", type: "string" },
-            { text: ", ", type: "punct" },
-            { text: "\"Karaoke night 🎤\"", type: "string" },
-            { text: ", ", type: "punct" },
-            { text: "\"Try a new restaurant 🍜\"", type: "string" },
-            { text: ",\n    ", type: "punct" },
-            { text: "\"Game night 🎲\"", type: "string" },
-            { text: ", ", type: "punct" },
-            { text: "\"Sunset walk 🌅\"", type: "string" },
-            { text: ", ", type: "punct" },
-            { text: "\"Photo booth strips 📸\"", type: "string" },
-            { text: ", ", type: "punct" },
-            { text: "\"Coffee date ☕\"", type: "string" },
-            { text: "\n  ];\n", type: "punct" },
-            { text: "  const", type: "keyword" },
-            { text: " colors", type: "variable" },
-            { text: " = ", type: "punct" },
-            { text: "[\"#ff8fa3\",\"#ff4769\",\"#ffb3c1\",\"#e63956\",\"#ff9eb1\",\"#d81b60\",\"#ffc0cb\",\"#c72c48\",\"#ff7a90\",\"#eb5c73\"];\n \n", type: "string" },
-            { text: "  const", type: "keyword" },
-            { text: " canvas", type: "variable" },
-            { text: " = ", type: "punct" },
-            { text: "document", type: "variable" },
-            { text: ".", type: "punct" },
-            { text: "getElementById", type: "function" },
-            { text: "('wheel');\n", type: "string" },
-            { text: "  const", type: "keyword" },
-            { text: " ctx", type: "variable" },
-            { text: " = ", type: "punct" },
-            { text: "canvas", type: "variable" },
-            { text: ".", type: "punct" },
-            { text: "getContext", type: "function" },
-            { text: "('2d');\n", type: "string" },
-            { text: "  const", type: "keyword" },
-            { text: " n", type: "variable" },
-            { text: " = ", type: "punct" },
-            { text: "options", type: "variable" },
-            { text: ".", type: "punct" },
-            { text: "length;\n", type: "variable" },
-            { text: "  const", type: "keyword" },
-            { text: " arc", type: "variable" },
-            { text: " = ", type: "punct" },
-            { text: "(2*Math.PI)/n;\n", type: "string" },
-            { text: "  let", type: "keyword" },
-            { text: " currentRotation", type: "variable" },
-            { text: " = ", type: "punct" },
-            { text: "0;\n \n", type: "string" },
-            { text: "  function", type: "keyword" },
-            { text: " drawWheel", type: "function" },
+            { text: "// Initializing spin wheel date app...\n", type: "comment" },
+            { text: "const", type: "keyword" },
+            { text: " wheelConfig", type: "variable" },
+            { text: " = {\n", type: "punct" },
+            { text: "    title", type: "variable" },
+            { text: ": ", type: "punct" },
+            { text: '"Spin for a Date Night 🎡"', type: "string" },
+            { text: ",\n    canvasSize", type: "variable" },
+            { text: ": ", type: "punct" },
+            { text: "300", type: "variable" },
+            { text: ",\n    status", type: "variable" },
+            { text: ": ", type: "punct" },
+            { text: '"Ready to pick tonight\'s adventure"\n', type: "string" },
+            { text: "};\n\n", type: "punct" },
+            { text: "function", type: "keyword" },
+            { text: " spinTheWheel", type: "function" },
             { text: "() {\n", type: "punct" },
-            { text: "    for ", type: "keyword" },
-            { text: "(let i = 0; i < n; i++) {\n", type: "punct" },
-            { text: "      const angle = i * arc;\n      ctx.beginPath();\n      ctx.moveTo(150,150);\n      ctx.arc(150,150,150, angle, angle+arc);\n      ctx.fillStyle = colors[i % colors.length];\n      ctx.fill();\n      ctx.save();\n      ctx.translate(150,150);\n      ctx.rotate(angle + arc/2);\n      ctx.textAlign = 'right';\n      ctx.fillStyle = '#fff';\n      ctx.font = 'bold 11px Segoe UI';\n      ctx.fillText(options[i], 140, 5);\n      ctx.restore();\n    }\n  }\n  drawWheel();\n \n", type: "comment" },
-            { text: "  document", type: "variable" },
+            { text: "    const", type: "keyword" },
+            { text: " options", type: "variable" },
+            { text: " = [\n", type: "punct" },
+            { text: '        "Movie night at home 🍿",\n        "Cook a new recipe together 🍝",\n        "Stargazing 🌌",\n        "Picnic in the park 🧺",\n        "Karaoke night 🎤",\n        "Try a new restaurant 🍜",\n        "Game night 🎲",\n        "Sunset walk 🌅",\n        "Photo booth strips 📸",\n        "Coffee date ☕"\n', type: "string" },
+            { text: "    ];\n", type: "punct" },
+            { text: "    const", type: "keyword" },
+            { text: " winningIndex", type: "variable" },
+            { text: " = ", type: "punct" },
+            { text: "Math", type: "variable" },
             { text: ".", type: "punct" },
-            { text: "getElementById", type: "function" },
-            { text: "('spinBtn').", type: "punct" },
-            { text: "addEventListener", type: "function" },
-            { text: "('click', () => {\n", type: "string" },
-            { text: "    const resultBox = document.getElementById('result');\n    resultBox.style.display = 'none';\n    const extraSpins = 6 + Math.random()*3;\n    const winningIndex = Math.floor(Math.random()*n);\n    const targetAngleDeg = 360 - (winningIndex*(360/n)) - (360/n/2);\n    const totalRotation = currentRotation + extraSpins*360 + targetAngleDeg - (currentRotation % 360);\n    currentRotation = totalRotation;\n    canvas.style.transform = `rotate(${totalRotation}deg)`;\n    setTimeout(() => {\n      resultBox.innerText = `Tonight's date: ${options[winningIndex]}`;\n      resultBox.style.display = 'block';\n    }, 4100);\n  });\n", type: "comment" },
-            { text: "</script>\n</body>\n</html>", type: "html-tag" }
+            { text: "floor", type: "function" },
+            { text: "(", type: "punct" },
+            { text: "Math", type: "variable" },
+            { text: ".", type: "punct" },
+            { text: "random", type: "function" },
+            { text: "() * options.", type: "punct" },
+            { text: "length", type: "variable" },
+            { text: ");\n", type: "punct" },
+            { text: "    ", type: "punct" },
+            { text: "return", type: "keyword" },
+            { text: ' options[winningIndex];\n', type: "string" },
+            { text: "};\n\n", type: "punct" },
+            { text: "// Executing choice sequence...\n", type: "comment" },
+            { text: "console", type: "variable" },
+            { text: ".", type: "punct" },
+            { text: "log", type: "function" },
+            { text: "(", type: "punct" },
+            { text: "spinTheWheel", type: "function" },
+            { text: "());", type: "punct" }
         ];
 
         let audioCtx = null;
