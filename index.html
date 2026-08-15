@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Compiling Love...</title>
+    <title>Compiling Date Night Wheel...</title>
     <style>
         body {
             margin: 0;
@@ -17,13 +17,16 @@
         }
 
         .terminal {
-            width: 85%;
-            max-width: 700px;
+            width: 90%;
+            max-width: 800px;
+            height: 80vh;
             background-color: #1e1e1e;
             border-radius: 8px;
             box-shadow: 0 20px 30px rgba(0, 0, 0, 0.6);
             overflow: hidden;
             border: 1px solid #333333;
+            display: flex;
+            flex-direction: column;
         }
 
         .terminal-header {
@@ -32,6 +35,7 @@
             display: flex;
             align-items: center;
             gap: 8px;
+            flex-shrink: 0;
         }
 
         .dot {
@@ -52,10 +56,11 @@
 
         .terminal-body {
             padding: 20px;
-            font-size: 15px;
-            line-height: 1.6;
+            font-size: 13px;
+            line-height: 1.5;
             white-space: pre-wrap;
-            min-height: 240px;
+            overflow-y: auto;
+            flex-grow: 1;
         }
 
         /* VS Code Dark+ Theme Colors */
@@ -65,11 +70,14 @@
         .function { color: #dcdcaa; }
         .string { color: #ce9178; }
         .punct { color: #d4d4d4; }
+        .html-tag { color: #569cd6; }
+        .attr-name { color: #9cdcfe; }
+        .attr-val { color: #ce9178; }
 
         .cursor {
             display: inline-block;
             width: 8px;
-            height: 16px;
+            height: 15px;
             background-color: #aeafad;
             animation: blink 1s infinite;
             vertical-align: middle;
@@ -83,7 +91,7 @@
 
         .hint {
             position: absolute;
-            bottom: 20px;
+            bottom: 12px;
             color: #777;
             font-size: 12px;
             letter-spacing: 0.5px;
@@ -97,7 +105,7 @@
             <div class="dot red"></div>
             <div class="dot yellow"></div>
             <div class="dot green"></div>
-            <div class="terminal-title">love_script.js</div>
+            <div class="terminal-title">spin_wheel_date.html</div>
         </div>
         <div class="terminal-body" id="terminal-body"><span id="code-content"></span><span class="cursor"></span></div>
     </div>
@@ -105,40 +113,120 @@
     <div class="hint">Click anywhere on the page to enable typing sound effects!</div>
 
     <script>
-        // Tokenized code structure with VS Code syntax types
+        // Tokenized code structure for the Spin the Wheel Date script
         const tokens = [
-            { text: "// Initializing system...\n", type: "comment" },
-            { text: "const", type: "keyword" },
-            { text: " girlfriend", type: "variable" },
-            { text: " = {\n", type: "punct" },
-            { text: "    name", type: "variable" },
-            { text: ": ", type: "punct" },
-            { text: '"My Everything ❤️"', type: "string" },
-            { text: ",\n    smile", type: "variable" },
-            { text: ": ", type: "punct" },
-            { text: '"Absolute perfection"', type: "string" },
-            { text: ",\n    status", type: "variable" },
-            { text: ": ", type: "punct" },
-            { text: '"Making my life infinitely better"\n', type: "string" },
-            { text: "};\n\n", type: "punct" },
-            { text: "function", type: "keyword" },
-            { text: " declareLove", type: "function" },
+            { text: "<!-- 02 spin the wheel date · HTML -->\n", type: "comment" },
+            { text: "<!DOCTYPE html>\n", type: "html-tag" },
+            { text: "<html ", type: "html-tag" },
+            { text: "lang", type: "attr-name" },
+            { text: "=\"en\">\n", type: "attr-val" },
+            { text: "<head>\n", type: "html-tag" },
+            { text: "  <meta ", type: "html-tag" },
+            { text: "charset", type: "attr-name" },
+            { text: "=\"UTF-8\" />\n", type: "attr-val" },
+            { text: "  <meta ", type: "html-tag" },
+            { text: "name", type: "attr-name" },
+            { text: "=\"viewport\" ", type: "attr-val" },
+            { text: "content", type: "attr-name" },
+            { text: "=\"width=device-width, initial-scale=1.0\" />\n", type: "attr-val" },
+            { text: "  <title>", type: "html-tag" },
+            { text: "Spin for a Date Night 🎡", type: "punct" },
+            { text: "</title>\n", type: "html-tag" },
+            { text: "  <style>\n", type: "html-tag" },
+            { text: "    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }\n", type: "comment" },
+            { text: "    body { background: linear-gradient(135deg, #ffe6ea 0%, #ffc3d0 100%); min-height: 100vh; }\n", type: "comment" },
+            { text: "    h1 { color: #e63956; text-align: center; }\n", type: "comment" },
+            { text: "    .wheel-wrap { position: relative; width: 300px; height: 300px; margin: 0 auto; }\n", type: "comment" },
+            { text: "    #wheel { border-radius: 50%; transition: transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99); }\n", type: "comment" },
+            { text: "    .spin-btn { background: #ff4769; color: #fff; border-radius: 50px; cursor: pointer; }\n", type: "comment" },
+            { text: "  </style>\n", type: "html-tag" },
+            { text: "</head>\n", type: "html-tag" },
+            { text: "<body>\n\n", type: "html-tag" },
+            { text: "  <h1>", type: "html-tag" },
+            { text: "Spin for tonight's date idea 🎡", type: "punct" },
+            { text: "</h1>\n", type: "html-tag" },
+            { text: "  <div ", type: "html-tag" },
+            { text: "class", type: "attr-name" },
+            { text: "=\"wheel-wrap\">\n", type: "attr-val" },
+            { text: "    <div ", type: "html-tag" },
+            { text: "class", type: "attr-name" },
+            { text: "=\"pointer\"></div>\n", type: "attr-val" },
+            { text: "    <canvas ", type: "html-tag" },
+            { text: "id", type: "attr-name" },
+            { text: "=\"wheel\" ", type: "attr-val" },
+            { text: "width", type: "attr-name" },
+            { text: "=\"300\" ", type: "attr-val" },
+            { text: "height", type: "attr-name" },
+            { text: "=\"300\"></canvas>\n", type: "attr-val" },
+            { text: "  </div>\n", type: "html-tag" },
+            { text: "  <button ", type: "html-tag" },
+            { text: "class", type: "attr-name" },
+            { text: "=\"spin-btn\" ", type: "attr-val" },
+            { text: "id", type: "attr-name" },
+            { text: "=\"spinBtn\">", type: "attr-val" },
+            { text: "SPIN THE WHEEL", type: "punct" },
+            { text: "</button>\n", type: "html-tag" },
+            { text: "  <div ", type: "html-tag" },
+            { text: "class", type: "attr-name" },
+            { text: "=\"result\" ", type: "attr-val" },
+            { text: "id", type: "attr-name" },
+            { text: "=\"result\"></div>\n\n", type: "attr-val" },
+            { text: "  <script>\n", type: "html-tag" },
+            { text: "    const", type: "keyword" },
+            { text: " options", type: "variable" },
+            { text: " = [\n", type: "punct" },
+            { text: "      \"Movie night at home 🍿\", \"Cook a new recipe together 🍝\",\n", type: "string" },
+            { text: "      \"Stargazing 🌌\", \"Picnic in the park 🧺\", \"Karaoke night 🎤\",\n", type: "string" },
+            { text: "      \"Try a new restaurant 🍜\", \"Game night 🎲\", \"Sunset walk 🌅\"\n", type: "string" },
+            { text: "    ];\n\n", type: "punct" },
+            { text: "    const", type: "keyword" },
+            { text: " canvas", type: "variable" },
+            { text: " = ", type: "punct" },
+            { text: "document", type: "variable" },
+            { text: ".", type: "punct" },
+            { text: "getElementById", type: "function" },
+            { text: "('wheel');\n", type: "string" },
+            { text: "    const", type: "keyword" },
+            { text: " ctx", type: "variable" },
+            { text: " = ", type: "punct" },
+            { text: "canvas", type: "variable" },
+            { text: ".", type: "punct" },
+            { text: "getContext", type: "function" },
+            { text: "('2d');\n\n", type: "string" },
+            { text: "    function", type: "keyword" },
+            { text: " drawWheel", type: "function" },
             { text: "() {\n", type: "punct" },
-            { text: "    console", type: "variable" },
+            { text: "      // Rendering sectors and date choices...\n", type: "comment" },
+            { text: "      console", type: "variable" },
             { text: ".", type: "punct" },
             { text: "log", type: "function" },
-            { text: '("Loading feelings...");\n', type: "string" },
-            { text: "    ", type: "punct" },
-            { text: "return", type: "keyword" },
-            { text: ' "I love you more than words can code!";\n', type: "string" },
-            { text: "};\n\n", type: "punct" },
-            { text: "// Running sequence...\n", type: "comment" },
-            { text: "console", type: "variable" },
+            { text: "(\"Wheel initialized successfully!\");\n", type: "string" },
+            { text: "    }\n", type: "punct" },
+            { text: "    drawWheel();\n\n", type: "function" },
+            { text: "    document", type: "variable" },
             { text: ".", type: "punct" },
-            { text: "log", type: "function" },
+            { text: "getElementById", type: "function" },
+            { text: "('spinBtn').", type: "punct" },
+            { text: "addEventListener", type: "function" },
+            { text: "('click', () => {\n", type: "string" },
+            { text: "      // Spin animation triggered\n", type: "comment" },
+            { text: "      const", type: "keyword" },
+            { text: " winningIndex", type: "variable" },
+            { text: " = ", type: "punct" },
+            { text: "Math", type: "variable" },
+            { text: ".", type: "punct" },
+            { text: "floor", type: "function" },
             { text: "(", type: "punct" },
-            { text: "declareLove", type: "function" },
-            { text: "());", type: "punct" }
+            { text: "Math", type: "variable" },
+            { text: ".", type: "punct" },
+            { text: "random", type: "function" },
+            { text: "() * options.length);\n", type: "punct" },
+            { text: "      alert", type: "function" },
+            { text: "(`Tonight's date: ${options[winningIndex]}`);\n", type: "string" },
+            { text: "    });\n", type: "punct" },
+            { text: "  </script>\n", type: "html-tag" },
+            { text: "</body>\n", type: "html-tag" },
+            { text: "</html>", type: "html-tag" }
         ];
 
         let audioCtx = null;
@@ -168,6 +256,7 @@
         }
 
         const container = document.getElementById("code-content");
+        const terminalBody = document.getElementById("terminal-body");
         let tokenIdx = 0;
         let charIdx = 0;
         let currentSpan = null;
@@ -192,11 +281,14 @@
 
                 charIdx++;
 
-                let typingSpeed = 35 + Math.random() * 25; // Random typing variation
+                // Auto-scroll terminal to follow typing cursor
+                terminalBody.scrollTop = terminalBody.scrollHeight;
 
-                // Longer pause after a full line (when hitting newline)
+                let typingSpeed = 25 + Math.random() * 20; // Fast typing speed
+
+                // Pause slightly on newlines
                 if (currentChar === '\n') {
-                    typingSpeed = 450; 
+                    typingSpeed = 200; 
                 }
 
                 if (charIdx >= token.text.length) {
