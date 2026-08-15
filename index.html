@@ -97,7 +97,7 @@
             <div class="dot red"></div>
             <div class="dot yellow"></div>
             <div class="dot green"></div>
-            <div class="terminal-title">spin_wheel_date.html</div>
+            <div class="terminal-title">love_script.js</div>
         </div>
         <div class="terminal-body" id="terminal-body"><span id="code-content"></span><span class="cursor"></span></div>
     </div>
@@ -105,53 +105,39 @@
     <div class="hint">Click anywhere on the page to enable typing sound effects!</div>
 
     <script>
-        // Tokenized code structure exactly matching the first prompt's format, displaying the second prompt's code content
+        // Tokenized code structure with VS Code syntax types
         const tokens = [
-            { text: "// Initializing spin wheel date app...\n", type: "comment" },
+            { text: "// Initializing system...\n", type: "comment" },
             { text: "const", type: "keyword" },
-            { text: " wheelConfig", type: "variable" },
+            { text: " girlfriend", type: "variable" },
             { text: " = {\n", type: "punct" },
-            { text: "    title", type: "variable" },
+            { text: "    name", type: "variable" },
             { text: ": ", type: "punct" },
-            { text: '"Spin for a Date Night 🎡"', type: "string" },
-            { text: ",\n    canvasSize", type: "variable" },
+            { text: '"My Everything ❤️"', type: "string" },
+            { text: ",\n    smile", type: "variable" },
             { text: ": ", type: "punct" },
-            { text: "300", type: "variable" },
+            { text: '"Absolute perfection"', type: "string" },
             { text: ",\n    status", type: "variable" },
             { text: ": ", type: "punct" },
-            { text: '"Ready to pick tonight\'s adventure"\n', type: "string" },
+            { text: '"Making my life infinitely better"\n', type: "string" },
             { text: "};\n\n", type: "punct" },
             { text: "function", type: "keyword" },
-            { text: " spinTheWheel", type: "function" },
+            { text: " declareLove", type: "function" },
             { text: "() {\n", type: "punct" },
-            { text: "    const", type: "keyword" },
-            { text: " options", type: "variable" },
-            { text: " = [\n", type: "punct" },
-            { text: '        "Movie night at home 🍿",\n        "Cook a new recipe together 🍝",\n        "Stargazing 🌌",\n        "Picnic in the park 🧺",\n        "Karaoke night 🎤",\n        "Try a new restaurant 🍜",\n        "Game night 🎲",\n        "Sunset walk 🌅",\n        "Photo booth strips 📸",\n        "Coffee date ☕"\n', type: "string" },
-            { text: "    ];\n", type: "punct" },
-            { text: "    const", type: "keyword" },
-            { text: " winningIndex", type: "variable" },
-            { text: " = ", type: "punct" },
-            { text: "Math", type: "variable" },
+            { text: "    console", type: "variable" },
             { text: ".", type: "punct" },
-            { text: "floor", type: "function" },
-            { text: "(", type: "punct" },
-            { text: "Math", type: "variable" },
-            { text: ".", type: "punct" },
-            { text: "random", type: "function" },
-            { text: "() * options.", type: "punct" },
-            { text: "length", type: "variable" },
-            { text: ");\n", type: "punct" },
+            { text: "log", type: "function" },
+            { text: '("Loading feelings...");\n', type: "string" },
             { text: "    ", type: "punct" },
             { text: "return", type: "keyword" },
-            { text: ' options[winningIndex];\n', type: "string" },
+            { text: ' "I love you more than words can code!";\n', type: "string" },
             { text: "};\n\n", type: "punct" },
-            { text: "// Executing choice sequence...\n", type: "comment" },
+            { text: "// Running sequence...\n", type: "comment" },
             { text: "console", type: "variable" },
             { text: ".", type: "punct" },
             { text: "log", type: "function" },
             { text: "(", type: "punct" },
-            { text: "spinTheWheel", type: "function" },
+            { text: "declareLove", type: "function" },
             { text: "());", type: "punct" }
         ];
 
